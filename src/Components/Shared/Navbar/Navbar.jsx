@@ -1,22 +1,26 @@
 // import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
 // import { AuthContext } from "../../Provider/AuthProvider";
 
 
 
 const Navbar = () => {
 
-    // const { user, logOut } = useContext(AuthContext);
+    const { user  , logOut} = useAuth();
 
-    // const handleSignOut = () => {
-    //     logOut()
-    //         .then(res => {
-    //             console.log(res);
-    //         })
-    //         .catch(err => {
-    //             console.log(err);
-    //         })
-    // }
+    console.log(user?.photoURL);
+
+
+    const handleSignOut = () => {
+        logOut()
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
 
     const navLinks = <>
         <li className="">
@@ -49,7 +53,7 @@ const Navbar = () => {
                 Dashboard
             </NavLink>
         </li>
-        
+
 
     </>
 
@@ -76,24 +80,24 @@ const Navbar = () => {
                 </div>
                 <div className="">
 
-                    <Link to='/login'>
-                        <button className="text-[#152475] hover:bg-[#152475] hover:text-[white] font-md md:font-semobold px-1 md:px-3 md:py-1 rounded border border-[#152475]">Login</button>
-                    </Link>
 
-                    {/* {user ? (
+                    {user ? (
                         <div className="dropdown dropdown-end">
-                            <label data-tip={user.displayName} tabIndex={0} className="btn tooltip tooltip-left btn-ghost btn-circle avatar">
-                                <div className="w-10 border-2 border-[#152475] rounded-full">
-                                    <img src={user.photoURL} />
+                            <div className="flex items-center gap-1">
+                                <h2 className=" font-bold">{user?.displayName}</h2>
+                                <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 border-2 border-[#152475] rounded-full">
+                                        <img src={user?.photoURL} />
+                                    </div>
                                 </div>
-                            </label>
+                            </div>
                             <ul
                                 tabIndex={0}
                                 className="menu menu-sm dropdown-content mt-3 invisible absolute right-20 z-[1] p-2 shadow bg-base-100 rounded w-60"
                             >
                                 <li>
                                     <a className="justify-between text-md hover:bg-transparent font-bold text-[#152475]">
-                                        {user.displayName}
+                                        {user?.displayName}
                                     </a>
                                 </li>
                                 <li>
@@ -112,9 +116,9 @@ const Navbar = () => {
                     ) : (
                         <Link to="/login">
                             {" "}
-                            <button onClick={handleSignOut} className="text-[#152475] hover:bg-[#152475] hover:text-[white] font-md md:font-semobold px-1 md:px-3 md:py-1 rounded border border-[#152475]">Log In</button>{" "}
+                            <button className="text-[#152475] hover:bg-[#152475] hover:text-[white] font-md md:font-semobold px-1 md:px-3 md:py-1 rounded border border-[#152475]">Log In</button>{" "}
                         </Link>
-                    )} */}
+                    )}
 
                 </div>
             </div>

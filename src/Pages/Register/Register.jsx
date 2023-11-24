@@ -2,9 +2,37 @@ import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
+import { useForm } from "react-hook-form";
+import useAuth from "../../hooks/useAuth";
+
 
 const Register = () => {
+
     const [isShow, setIsShow] = useState(false);
+    const { createUser, updateUserProfile } = useAuth();
+
+
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm();
+
+
+    const onSubmit = (data) => {
+        console.log(data)
+        createUser(data.email, data.password)
+            .then(result => {
+                console.log(result.user);
+                updateUserProfile(data.name, data.photo)
+                    .then(() => {
+                        console.log('User profile updated.');
+                        reset();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+            })
+            .catch(errors => {
+                console.error(errors);
+            })
+    }
 
     return (
         <div>
@@ -14,46 +42,61 @@ const Register = () => {
                     <div className="border p-5 w-full max-w-sm mx-auto space-y-3">
                         <h2 className="text-2xl font-bold">Register Now</h2>
                         <p>Enter your details to Register.</p>
-                        {/* {error ? <p className="text-red-600 max-w-[400px] text-sm text-center relative -bottom-4">{error}</p> : ''}
-                        onSubmit={handleRegister} */}
-                        <form className="space-y-4">
+
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                             <div>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    id=""
-                                    className="  border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
-                                    placeholder="Name"
+                                <div>
+                                    <input
+                                        type="text"
+                                        {...register("name", { required: true })}
+                                        name="name"
+                                        id=""
+                                        className=" border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
+                                        placeholder="Name"
 
-                                />
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    className="  border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
-                                    placeholder="Email"
-
-                                />
+                                    />
+                                    {errors.name && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Name is required</span>}
+                                </div>
+                                <div>
+                                    <input
+                                        type="email"
+                                        {...register("email", { required: true })}
+                                        name="email"
+                                        id="email"
+                                        className="  border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
+                                        placeholder="Email"
+                                    />
+                                    {errors.email && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Email is required</span>}
+                                </div>
                                 <div className="relative">
                                     <input
                                         type={isShow ? "password" : "text"}
+                                        {...register("password", {
+                                            required: true,
+                                            minLength: 6,
+                                            pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
+                                        })}
                                         name="password"
                                         id=""
                                         className=" border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
                                         placeholder="Password"
-
                                     />
-                                    <span onClick={() => setIsShow(!isShow)} className="absolute right-2 top-1/3 cursor-default">{isShow ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
+                                    <span onClick={() => setIsShow(!isShow)} className="absolute right-2 top-3.5 cursor-default">{isShow ? <AiFillEye /> : <AiFillEyeInvisible />}</span>
+                                    {errors.password?.type === 'pattern' && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Password must have a capital letter, a special character, a number and a small letter</span>}
+                                    {errors.password?.type === 'required' && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Password is required</span>}
+                                    {errors.password?.type === 'minLength' && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Password must be 6 characters</span>}
                                 </div>
-                                <input
-                                    type="text"
-                                    name="photo"
-                                    id=""
-                                    className=" border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
-                                    placeholder="Photo URL"
-
-                                />
-
+                                <div>
+                                    <input
+                                        type="text"
+                                        {...register("photo", { required: true })}
+                                        name="photo"
+                                        id=""
+                                        className=" border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
+                                        placeholder="Photo URL"
+                                    />
+                                    {errors.photo && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Email is required</span>}
+                                </div>
                             </div>
                             <button
                                 type="submit"
@@ -61,14 +104,14 @@ const Register = () => {
                             >
                                 Register
                             </button>
-                            <p className="text-center">
-                                Already have an account? {" "}
-                                <Link className="text-base text-[#152475] underline" to="/login">
-                                    Log In
-                                </Link>
-                            </p>
-                            <SocialLogin></SocialLogin>
                         </form>
+                        <p className="text-center">
+                            Already have an account? {" "}
+                            <Link className="text-base text-[#152475] underline" to="/login">
+                                Log In
+                            </Link>
+                        </p>
+                        <SocialLogin></SocialLogin>
                     </div>
 
                 </div>
