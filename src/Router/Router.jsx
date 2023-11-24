@@ -4,6 +4,8 @@ import Error from "../Pages/Error/Error";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AllProperties from "../Pages/AllProperties/AllProperties";
+import PrivateRoute from "./PrivateRoute";
 
 const createdRoute = createBrowserRouter([
     {
@@ -14,6 +16,10 @@ const createdRoute = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
+            },
+            {
+                path: '/all-properties',
+                element: <PrivateRoute><AllProperties></AllProperties></PrivateRoute>
             },
             {
                 path: '/login',
