@@ -2,6 +2,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 import useAuth from "../hooks/useAuth";
+import Loader from "../Components/Shared/Loader/Loader";
 
 const PrivateRoute = ({children}) => {
 
@@ -9,9 +10,7 @@ const PrivateRoute = ({children}) => {
     const location = useLocation();
 
     if (loading) {
-        return <div className="flex justify-center items-center h-[80vh]">
-            <span className="loading loading-lg loading-spinner text-[#152475]"></span>
-        </div>
+        <Loader></Loader>
     }
 
     if (user) {

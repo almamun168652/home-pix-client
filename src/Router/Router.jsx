@@ -6,6 +6,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AllProperties from "../Pages/AllProperties/AllProperties";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
 
 const createdRoute = createBrowserRouter([
     {
@@ -29,6 +30,16 @@ const createdRoute = createBrowserRouter([
                 path: '/register',
                 element: <Register></Register>
             },
+        ]
+    },
+    {
+        path: 'dashboard',
+        element: <Dashboard></Dashboard>,
+        children: [
+            {
+                path: 'cart',
+                element: <h1>Hellow</h1>
+            }
         ]
     }
 ])

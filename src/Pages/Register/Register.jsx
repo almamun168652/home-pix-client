@@ -95,7 +95,7 @@ const Register = () => {
                                         className=" border-b-2  border-gray-300 text-black text-sm  focus:border-b-2 focus:outline-none focus:border-black block w-full p-2.5  "
                                         placeholder="Photo URL"
                                     />
-                                    {errors.photo && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Email is required</span>}
+                                    {errors.photo && <span className="text-red-600 relative -top-1 px-2.5 text-sm">Photo URL is required</span>}
                                 </div>
                             </div>
                             <button

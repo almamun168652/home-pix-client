@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="footer">
           <aside>
             <Link to='/' className="flex gap-1 items-center">
-              <img className="w-8 md:w-12" src="https://i.ibb.co/cQbN1hq/logo.png" alt="" /><span className="text-[#152475] font-bold text-xl md:text-3xl">Connect Job</span>
+              <img className="w-8 md:w-12" src="https://i.ibb.co/cQbN1hq/logo.png" alt="" /><span className="text-[#152475] font-bold text-xl md:text-3xl">Home Pix</span>
             </Link>
             <p>
               Home Pix Ltd.
