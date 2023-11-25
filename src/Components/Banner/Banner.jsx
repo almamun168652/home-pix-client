@@ -8,7 +8,6 @@ const Banner = () => {
             <div className="bg-[url(https://i.ibb.co/fYTvpHB/banner.jpg)] bg-no-repeat bg-cover bg-center">
                 <section className=" bg-[#00000086] flex items-center min-h-[80vh]">
                     <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
-
                         <h1 className="mb-4 text-xl md:text-4xl font-bold tracking-tight leading-none  lg:text-5xl text-white">Property Solution For Everyone.</h1>
                         <p className="my-8 text-sm md:text-md font-normal text-white sm:px-16 xl:px-48 ">Discover Your Dream Home! Explore a curated collection of stunning properties for sale on our real estate website. From cozy starter homes to luxurious estates, find the perfect property to suit your lifestyle. Your next chapter begins here – Start your property journey today!</p>
                         <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">

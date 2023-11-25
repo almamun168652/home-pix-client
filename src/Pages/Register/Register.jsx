@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
+import useAxiosOpen from "../../hooks/useAxiosOpen";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
 
     const [isShow, setIsShow] = useState(false);
     const { createUser, updateUserProfile } = useAuth();
+    const navigate = useNavigate();
 
+    const axiosOpen = useAxiosOpen();
 
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
 
@@ -22,8 +26,25 @@ const Register = () => {
                 console.log(result.user);
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        console.log('User profile updated.');
-                        reset();
+
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                        axiosOpen.post('/users' , userInfo)
+                        .then(res => {
+                            if(res.data?.insertedId){
+                                reset();
+                                Swal.fire({
+                                    title: "Registered!",
+                                    text: "User created Successfully.",
+                                    icon: "success"
+                                  });
+                                  navigate('/')
+                            }
+                        })
+                        
+                        
                     })
                     .catch((error) => {
                         console.log(error);

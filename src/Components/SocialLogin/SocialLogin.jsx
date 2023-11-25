@@ -2,6 +2,7 @@
 import swal from "sweetalert";
 import useAuth from "../../hooks/useAuth";
 import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosOpen from "../../hooks/useAxiosOpen";
 
 
 
@@ -9,14 +10,25 @@ const SocialLogin = () => {
     const { logInWithGoogle } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosOpen = useAxiosOpen();
 
-    
+
     const handleLogInWithGoogle = () => {
         logInWithGoogle()
             .then(res => {
-                console.log(res);
-                swal("Good job!", "Request Successfully!", "success");
-                navigate(location.state ? location.state : '/');
+                console.log(res.user);
+
+                const userInfo = {
+                    email: res.user?.email,
+                    name: res.user?.displayName
+                }
+
+                axiosOpen.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        swal("Good job!", "Request Successfully!", "success");
+                        navigate(location.state ? location.state : '/');
+                    })
 
             })
             .catch(error => {

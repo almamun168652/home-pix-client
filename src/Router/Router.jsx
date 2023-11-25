@@ -36,10 +36,63 @@ const createdRoute = createBrowserRouter([
         path: 'dashboard',
         element: <Dashboard></Dashboard>,
         children: [
+            // user only
             {
-                path: 'cart',
-                element: <h1>Hellow</h1>
-            }
+                path: 'my-profile',
+                element: <h1>my profile</h1>
+            },
+            {
+                path: 'wishlist',
+                element: <h1>wishlist</h1>
+            },
+            {
+                path: 'property-bought',
+                element: <h1>property bought</h1>
+            },
+            {
+                path: 'my-reviews',
+                element: <h1>my reviews</h1>
+            },
+            
+            // agent only
+            {
+                path: 'agent-profile',
+                element: <h1>agent profile</h1>
+            },
+            {
+                path: 'add-property',
+                element: <h1>add property</h1>
+            },
+            {
+                path: 'my-added-properties',
+                element: <h1>my added properties</h1>
+            },
+            {
+                path: 'my-sold-properties',
+                element: <h1>my sold properties</h1>
+            },
+            {
+                path: 'requested-properties',
+                element: <h1>requested properties</h1>
+            },
+
+            // admin only
+            {
+                path: 'admin-profile',
+                element: <h1>Admin Profile</h1>
+            },
+            {
+                path: 'manage-properties',
+                element: <h1>manage properties</h1>
+            },
+            {
+                path: 'manage-users',
+                element: <h1>manage-users</h1>
+            },
+            {
+                path: 'manage-reviews',
+                element: <h1>manage reviews</h1>
+            },
         ]
     }
 ])
