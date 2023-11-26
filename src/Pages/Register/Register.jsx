@@ -29,7 +29,8 @@ const Register = () => {
 
                         const userInfo = {
                             name: data.name,
-                            email: data.email
+                            email: data.email,
+                            role: 'user'
                         }
                         axiosOpen.post('/users' , userInfo)
                         .then(res => {

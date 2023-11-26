@@ -15,8 +15,8 @@ const Dashboard = () => {
     const isAdmin = true
 
     return (
-        <div className="flex max-w-[1200px] mx-auto px-4">
-            <div className="w-3/12 min-h-screen bg-[#152475]">
+        <div className="flex flex-col md:flex-row max-w-[1200px] mx-auto px-4">
+            <div className="w-full md:w-3/12 min-h-screen bg-[#152475]">
                 <div className="bg-white border-x-2 border-[#152475] py-2 mt-4 mb-8 flex justify-center">
                     <Link to='/' className="flex gap-1 items-center">
                         <img className="w-8" src="https://i.ibb.co/cQbN1hq/logo.png" alt="" /><span className="text-[#152475] font-bold text-xl">Home Pix</span>
@@ -193,7 +193,7 @@ const Dashboard = () => {
 
                 </ul>}
             </div>
-            <div>
+            <div className="w-full md:w-9/12 bg-[#7DD3FC] px-4">
                 <Outlet></Outlet>
             </div>
         </div>

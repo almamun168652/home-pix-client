@@ -7,6 +7,7 @@ import Register from "../Pages/Register/Register";
 import AllProperties from "../Pages/AllProperties/AllProperties";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
+import ManageUsers from "../Components/Dashboard/AdminDashboard/ManageUsers";
 
 const createdRoute = createBrowserRouter([
     {
@@ -87,7 +88,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'manage-users',
-                element: <h1>manage-users</h1>
+                element: <ManageUsers></ManageUsers>
             },
             {
                 path: 'manage-reviews',
