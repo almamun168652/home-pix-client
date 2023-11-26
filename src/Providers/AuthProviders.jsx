@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import PropTypes from 'prop-types';
 import { app } from "../Firebase/firebase.config";
+import useAxiosOpen from "../hooks/useAxiosOpen";
 
 
 const auth = getAuth(app);
@@ -11,7 +12,8 @@ export const AuthContext = createContext(null);
 const AuthProviders = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-
+    const axiosOpen = useAxiosOpen();
+    
     const googleProvider = new GoogleAuthProvider();
 
 
@@ -51,12 +53,28 @@ const AuthProviders = ({ children }) => {
     useEffect(() => {
         const unscubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            if(currentUser){
+                // get token and store client
+                const userInfo = {
+                    email: currentUser.email
+                }
+                axiosOpen.post('/jwt' , userInfo)
+                .then(res => {
+                    if(res.data?.token){
+                        localStorage.setItem('access-token' , res.data.token)
+                    }  
+                })
+
+            }else{
+                // TO DO: remove token (it token stored in the client side)
+                localStorage.removeItem('access-token');
+            }
             setLoading(false);
         });
         return () => {
             unscubscribe();
         };
-    }, []);
+    }, [axiosOpen]);
 
     const authInfo = {
         user,

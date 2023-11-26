@@ -5,14 +5,17 @@ import { FaMoneyCheckDollar , FaHouseMedicalCircleCheck } from "react-icons/fa6"
 import { VscPreview } from "react-icons/vsc";
 import { MdAddBusiness  ,MdPending , MdOutlineRateReview   } from "react-icons/md";
 import { BsHousesFill } from "react-icons/bs";
+import useAdmin from "../hooks/useAdmin";
+import useAgent from "../hooks/useAgent";
 
 
 
 const Dashboard = () => {
 
-    const isAgent = false;
     const isUser = false;
-    const isAdmin = true
+    const [isAdmin] = useAdmin();
+    const [isAgent] = useAgent();
+
 
     return (
         <div className="flex flex-col md:flex-row max-w-[1200px] mx-auto px-4">
