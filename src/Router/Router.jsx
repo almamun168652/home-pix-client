@@ -8,6 +8,7 @@ import AllProperties from "../Pages/AllProperties/AllProperties";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import ManageUsers from "../Components/Dashboard/AdminDashboard/ManageUsers";
+import AdminRoute from "./AdminRoute";
 
 const createdRoute = createBrowserRouter([
     {
@@ -35,7 +36,7 @@ const createdRoute = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><AdminRoute><Dashboard></Dashboard></AdminRoute></PrivateRoute>,
         children: [
             // user only
             {
