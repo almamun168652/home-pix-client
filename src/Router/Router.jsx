@@ -9,6 +9,9 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import ManageUsers from "../Components/Dashboard/AdminDashboard/ManageUsers";
 import AdminRoute from "./AdminRoute";
+import AgentRoute from "./AgentRoute";
+import AdminProfile from "../Components/Dashboard/AdminDashboard/AdminProfile";
+import AgentProfile from "../Components/Dashboard/AgentDashboard/AgentProfile";
 
 const createdRoute = createBrowserRouter([
     {
@@ -36,7 +39,7 @@ const createdRoute = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <PrivateRoute><AdminRoute><Dashboard></Dashboard></AdminRoute></PrivateRoute>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             // user only
             {
@@ -59,41 +62,41 @@ const createdRoute = createBrowserRouter([
             // agent only
             {
                 path: 'agent-profile',
-                element: <h1>agent profile</h1>
+                element: <AgentRoute><AgentProfile></AgentProfile></AgentRoute>
             },
             {
                 path: 'add-property',
-                element: <h1>add property</h1>
+                element: <AgentRoute><h1>add property</h1></AgentRoute>
             },
             {
                 path: 'my-added-properties',
-                element: <h1>my added properties</h1>
+                element: <AgentRoute><h1>My added properties</h1></AgentRoute>
             },
             {
                 path: 'my-sold-properties',
-                element: <h1>my sold properties</h1>
+                element: <AgentRoute><h1>my sold properties</h1></AgentRoute>
             },
             {
                 path: 'requested-properties',
-                element: <h1>requested properties</h1>
+                element: <AgentRoute><h1>requested properties</h1></AgentRoute>
             },
 
             // admin only
             {
                 path: 'admin-profile',
-                element: <h1>Admin Profile</h1>
+                element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             },
             {
                 path: 'manage-properties',
-                element: <h1>manage properties</h1>
+                element: <AdminRoute><h1>manage properties</h1></AdminRoute>
             },
             {
                 path: 'manage-users',
-                element: <ManageUsers></ManageUsers>
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             },
             {
                 path: 'manage-reviews',
-                element: <h1>manage reviews</h1>
+                element: <AdminRoute><h1>manage reviews</h1></AdminRoute>
             },
         ]
     }

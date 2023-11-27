@@ -16,11 +16,11 @@ const SocialLogin = () => {
     const handleLogInWithGoogle = () => {
         logInWithGoogle()
             .then(res => {
-                console.log(res.user);
 
                 const userInfo = {
-                    email: res.user?.email,
                     name: res.user?.displayName,
+                    email: res.user?.email,
+                    photo: res.user.photoURL,
                     role: 'user'
                 }
 
