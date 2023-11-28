@@ -2,13 +2,46 @@ import PropTypes from 'prop-types';
 import { MdLocationOn } from "react-icons/md";
 import { HiCurrencyDollar } from "react-icons/hi2";
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { axiosSecure } from '../../../hooks/useAxiosSecure';
 
 
 
 
-const AddedPropertyCard = ({ item }) => {
+const AddedPropertyCard = ({ item , refetch }) => {
 
-    const {_id, startPrice, endPrice, status, propertyImage, propertyTitle, propertyLocation, agentName, agentImage } = item || {}
+    const { _id, startPrice, endPrice, status, propertyImage, propertyTitle, propertyLocation, agentName, agentImage } = item || {}
+
+
+    const handlePropertyDelete = async (_id) => {
+
+        try {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You want to delete it?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                   axiosSecure.delete(`/addedProperty/${_id}`)
+                   .then(res => {
+                    if(res.data.deletedCount > 0){
+                        Swal.fire("Delete", "Successfully Delete", "success");
+                        refetch();
+                    }
+                   })
+                }
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
 
     return (
         <div className="flex flex-col justify-center items-center">
@@ -39,7 +72,7 @@ const AddedPropertyCard = ({ item }) => {
                                 </button>
                             </Link>
                             <button
-
+                                onClick={() => handlePropertyDelete(_id)}
                                 className="font-semibold px-3 py-1 rounded border bg-red-700 hover:bg-red-600 text-white"
                             >
                                 Delete
@@ -54,6 +87,7 @@ const AddedPropertyCard = ({ item }) => {
 
 AddedPropertyCard.propTypes = {
     item: PropTypes.object.isRequired,
+    refetch: PropTypes.func,
 }
 
 

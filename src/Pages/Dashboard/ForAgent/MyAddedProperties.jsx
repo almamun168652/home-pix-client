@@ -3,13 +3,14 @@ import DashboardTitle from "../../../Components/Dashboard/DashboardTitle/Dashboa
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import AddedPropertyCard from "./AddedPropertyCard";
+import Loader from "../../../Components/Shared/Loader/Loader";
 
 
 const MyAddedProperties = () => {
 
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth();
-    const { data: myProperties = [] } = useQuery({
+    const { data: myProperties = [] , refetch , isPending: isPropertiesLoading } = useQuery({
         queryKey: ['addedProperties', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/properties?email=${user.email}`);
@@ -17,16 +18,18 @@ const MyAddedProperties = () => {
         }
     })
 
-    
+    if(isPropertiesLoading){
+        return <Loader></Loader>
+    }
 
 
     return (
         <div>
             <DashboardTitle title="My Added Properties"></DashboardTitle>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mx-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mx-4 mb-10">
                 {
-                    myProperties.map(item => <AddedPropertyCard key={item._id} item={item} ></AddedPropertyCard>)
+                    myProperties.map(item => <AddedPropertyCard refetch={refetch} key={item._id} item={item} ></AddedPropertyCard>)
                 }
             </div>
 
