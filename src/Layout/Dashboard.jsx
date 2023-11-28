@@ -9,8 +9,8 @@ import useAdmin from "../hooks/useAdmin";
 import useAgent from "../hooks/useAgent";
 
 
-
 const Dashboard = () => {
+    
 
     const [isAdmin] = useAdmin();
     const [isAgent] = useAgent();

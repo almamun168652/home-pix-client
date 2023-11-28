@@ -16,6 +16,9 @@ import AddProperty from "../Pages/Dashboard/ForAgent/AddProperty";
 import MyAddedProperties from "../Pages/Dashboard/ForAgent/MyAddedProperties";
 import PropertyUpdate from "../Pages/Dashboard/ForAgent/PropertyUpdate";
 import ManageProperties from "../Pages/Dashboard/ForAdmin/ManageProperties";
+import Details from "../Pages/Detaiils/Details";
+import Wishlist from "../Pages/Dashboard/ForUser/Wishlist";
+import Offered from "../Pages/Dashboard/ForUser/Offered";
 
 const createdRoute = createBrowserRouter([
     {
@@ -39,6 +42,11 @@ const createdRoute = createBrowserRouter([
                 path: '/register',
                 element: <Register></Register>
             },
+            {
+                path: '/verifiedProperty/details/:id',
+                element: <PrivateRoute><Details></Details></PrivateRoute>,
+                loader: ({params})=> fetch(`http://localhost:5000/verifiedProperty/details/${params.id}`) 
+            },
         ]
     },
     {
@@ -52,7 +60,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'wishlist',
-                element: <h1>wishlist</h1>
+                element: <Wishlist></Wishlist>
             },
             {
                 path: 'property-bought',
@@ -61,6 +69,11 @@ const createdRoute = createBrowserRouter([
             {
                 path: 'my-reviews',
                 element: <h1>my reviews</h1>
+            },
+            {
+                path: 'wishlist/offered/:id',
+                element: <Offered></Offered>,
+                loader: ({ params }) => fetch(`http://localhost:5000/wishlist/${params.id}`)
             },
 
             // agent only
