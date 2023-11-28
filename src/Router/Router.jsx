@@ -13,6 +13,8 @@ import AgentRoute from "./AgentRoute";
 import AdminProfile from "../Components/Dashboard/AdminDashboard/AdminProfile";
 import AgentProfile from "../Components/Dashboard/AgentDashboard/AgentProfile";
 import AddProperty from "../Pages/Dashboard/ForAgent/AddProperty";
+import MyAddedProperties from "../Pages/Dashboard/ForAgent/MyAddedProperties";
+import PropertyUpdate from "../Pages/Dashboard/ForAgent/PropertyUpdate";
 
 const createdRoute = createBrowserRouter([
     {
@@ -59,7 +61,7 @@ const createdRoute = createBrowserRouter([
                 path: 'my-reviews',
                 element: <h1>my reviews</h1>
             },
-            
+
             // agent only
             {
                 path: 'agent-profile',
@@ -71,7 +73,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'my-added-properties',
-                element: <AgentRoute><h1>My added properties</h1></AgentRoute>
+                element: <AgentRoute><MyAddedProperties></MyAddedProperties></AgentRoute>
             },
             {
                 path: 'my-sold-properties',
@@ -80,6 +82,11 @@ const createdRoute = createBrowserRouter([
             {
                 path: 'requested-properties',
                 element: <AgentRoute><h1>requested properties</h1></AgentRoute>
+            },
+            {
+                path: 'my-added-properties/update/:id',
+                element: <AgentRoute><PropertyUpdate></PropertyUpdate></AgentRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/addedProperties/${params.id}`)
             },
 
             // admin only

@@ -12,7 +12,6 @@ import useAgent from "../hooks/useAgent";
 
 const Dashboard = () => {
 
-    const isUser = false;
     const [isAdmin] = useAdmin();
     const [isAgent] = useAgent();
 
@@ -25,7 +24,7 @@ const Dashboard = () => {
                         <img className="w-8" src="https://i.ibb.co/cQbN1hq/logo.png" alt="" /><span className="text-[#152475] font-bold text-xl">Home Pix</span>
                     </Link>
                 </div>
-                {isUser && <ul>
+                { (!isAdmin && !isAgent) && <ul>
                     <li>
                         <NavLink
                             to="/dashboard/my-profile"
