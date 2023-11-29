@@ -7,6 +7,8 @@ import { MdAddBusiness  ,MdPending , MdOutlineRateReview   } from "react-icons/m
 import { BsHousesFill } from "react-icons/bs";
 import useAdmin from "../hooks/useAdmin";
 import useAgent from "../hooks/useAgent";
+import { CgDisplayGrid } from "react-icons/cg";
+
 
 
 const Dashboard = () => {
@@ -189,6 +191,18 @@ const Dashboard = () => {
                         >
                             <div className="flex items-center gap-2">
                                 <MdOutlineRateReview  />  <span>Manage Reviews</span>
+                            </div>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/dashboard/advertise-property"
+                            className={({ isActive, isPending }) =>
+                                isPending ? "pending" : isActive ? " bg-[#7DD3FC] font-semibold text-black box-border py-2 block w-full pl-10" : "text-white py-2 pl-10 border-b border-[#7DD3FC] block"
+                            }
+                        >
+                            <div className="flex items-center gap-2">
+                                <CgDisplayGrid  />  <span>Advertise Property</span>
                             </div>
                         </NavLink>
                     </li>

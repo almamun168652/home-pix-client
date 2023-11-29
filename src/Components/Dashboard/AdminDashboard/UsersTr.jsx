@@ -3,11 +3,13 @@ import { AiFillDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAxiosOpen from '../../../hooks/useAxiosOpen';
 
 
 const UsersTr = ({ item, refetch, index }) => {
 
     const axiosSecure = useAxiosSecure();
+    const axiosOpen = useAxiosOpen();
 
     const { name, email, _id, role } = item || {}
 
@@ -45,6 +47,45 @@ const UsersTr = ({ item, refetch, index }) => {
                 }
             })
     }
+
+
+    const getFraudAgentProperties = async (email) => {
+        const { data } = await axiosOpen(`/fraudAgentProperties/${email}`);
+        return data;
+    };
+
+    const fraudPropertyCick = async (fraudPropertiesIdsArray) => {
+        const { data } = await axiosOpen.post(`/fraudPropertyCick`, fraudPropertiesIdsArray);
+        return data;
+    };
+
+
+    const handleMarkAsFraud = (id) => {
+        axiosSecure.patch(`/users/fraud/${id}`)
+            .then(async res => {
+                console.log(res.data);
+                if (res.data?.modifiedCount > 0) {
+                    const fraudData = await getFraudAgentProperties(email);
+
+                    const fraudPropertiesId = fraudData.map(item => item._id);
+
+                    const data = await fraudPropertyCick(fraudPropertiesId);
+
+                    console.log(data);
+
+
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `This agent will fraud.!`,
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+    }
+
 
 
 
@@ -91,21 +132,45 @@ const UsersTr = ({ item, refetch, index }) => {
             </td>
             <td className="px-2 py-2 text-gray-900 text-center">
                 <Link to={``}>
-                    {role === 'admin' ? <span className='font-bold'>Admin</span> : <button onClick={() => handleMakeAdmin(_id)} className='border hover:bg-[#152475] hover:text-white border-[#152475] text-xs font-bold px-2 py-1 rounded md cursor-pointer text-[#152475]'>Make Admin</button>}
+                    {
+                        role == "fraud" ? <span className='font-bold'>Fraud</span> :
+                            <>
+                                {role === 'admin' ? <span className='font-bold'>Admin</span> : <button onClick={() => handleMakeAdmin(_id)} className='border hover:bg-[#152475] hover:text-white border-[#152475] text-xs font-bold px-2 py-1 rounded md cursor-pointer text-[#152475]'>Make Admin</button>}
+                            </>
+                    }
                 </Link>
             </td>
             <td className="px-2 py-2 text-gray-900 text-center">
                 <Link to={``}>
-                    {role === 'agent' ? <span className='font-bold'>Agent</span> : <button onClick={() => handleMakeAgent(_id)} className='border hover:bg-[#152475] hover:text-white border-[#152475] text-xs font-bold px-2 py-1 rounded md cursor-pointer text-[#152475]'>Make Agent</button>}
+
+                    {
+                        role == "fraud" ? <span className='font-bold'>Fraud</span> :
+                            <>
+                                {role === 'agent' ? <span className='font-bold'>Agent</span> : <button onClick={() => handleMakeAgent(_id)} className='border hover:bg-[#152475] hover:text-white border-[#152475] text-xs font-bold px-2 py-1 rounded md cursor-pointer text-[#152475]'>Make Agent</button>}
+                            </>
+                    }
+
                 </Link>
             </td>
-            {
-                role === 'agent' ? <td>
-                    <Link to={``}>
-                        <button className='border hover:bg-[#152475] hover:text-white border-[#152475] text-xs font-bold px-2 py-1 rounded md cursor-pointer text-[#152475]'>Make As Fraud</button>
-                    </Link>
-                </td> : <td></td>
-            }
+
+
+            <td className='px-2 py-2 text-gray-900 text-center'>
+                {
+                    role == "fraud" ? <span className='  font-bold'>Fraud</span> :
+                        <>
+                            {
+                                role === 'agent' ? <td>
+                                    <Link to={``}>
+                                        <button onClick={() => handleMarkAsFraud(_id)} className='border hover:bg-[#152475] hover:text-white border-[#152475] text-xs font-bold px-2 py-1 rounded md cursor-pointer text-[#152475]'>Mark As Fraud</button>
+                                    </Link>
+                                </td> : <td></td>
+                            }
+                        </>
+                }
+
+            </td>
+
+
             <td scope="row" className="px-2 py-2 text-gray-900">
                 {/* AiFillDelete */}
                 <AiFillDelete onClick={() => handleDeleteUser(_id)} className='mx-auto cursor-pointer text-3xl text-red-700 hover:text-[#152475]'></AiFillDelete>

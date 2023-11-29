@@ -34,7 +34,9 @@ const BoughtCard = ({ item }) => {
 
 
                         <div className='flex gap-4 mt-3'>
-                           
+                           {
+                            status == 'accepted' && <button className='text-white bg-[#152475] px-3 hover:bg-white hover:text-[#152475] font-semibold text-sm py-1 rounded border border-[#152475]'>Pay Now</button>
+                           }
                         </div>
 
                     </div>
