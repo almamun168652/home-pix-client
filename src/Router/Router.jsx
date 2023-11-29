@@ -21,6 +21,9 @@ import Wishlist from "../Pages/Dashboard/ForUser/Wishlist";
 import Offered from "../Pages/Dashboard/ForUser/Offered";
 import PropertyBought from "../Pages/Dashboard/ForUser/PropertyBought";
 import RequestedProperties from "../Pages/Dashboard/ForAgent/requestedProperties";
+import MyReview from "../Pages/Dashboard/ForUser/MyReview";
+import ManageReviews from "../Pages/Dashboard/ForAdmin/ManageReviews";
+import UserProfile from "../Components/Dashboard/UserDashboard/UserProfile";
 
 const createdRoute = createBrowserRouter([
     {
@@ -58,7 +61,7 @@ const createdRoute = createBrowserRouter([
             // user only
             {
                 path: 'my-profile',
-                element: <h1>my profile</h1>
+                element: <UserProfile></UserProfile>
             },
             {
                 path: 'wishlist',
@@ -70,7 +73,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'my-reviews',
-                element: <h1>my reviews</h1>
+                element: <MyReview></MyReview>
             },
             {
                 path: 'wishlist/offered/:id',
@@ -120,7 +123,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'manage-reviews',
-                element: <AdminRoute><h1>manage reviews</h1></AdminRoute>
+                element: <AdminRoute><ManageReviews></ManageReviews></AdminRoute>
             },
         ]
     }

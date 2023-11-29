@@ -1,14 +1,24 @@
 import { useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { AiOutlineCloseCircle } from 'react-icons/ai';
+import useRole from "../../hooks/useRole";
 
 
 const Details = () => {
 
+
+    const [userRole] = useRole();
+    const reviewDate = new Date();
+
     const axiosSecure = useAxiosSecure();
     const { _id, startPrice, description, endPrice, status, propertyImage, propertyTitle, propertyLocation, agentName, agentImage, agentEmail } = useLoaderData();
 
-    const handleAddWishlist = async() => {
+    const {photo , name , email} = userRole || {}
+
+    console.log(reviewDate);
+
+    const handleAddWishlist = async () => {
         const wishlistItem = {
             propertyId: _id,
             propertyImage,
@@ -36,6 +46,41 @@ const Details = () => {
         }
     }
 
+
+    const handleReviewSubmit = async(e) => {
+        e.preventDefault();
+        const form = e.target;
+        const reviewInfo = {
+            propertyId: _id,
+            propertyImage,
+            propertyTitle,
+            propertyLocation,
+            startPrice,
+            endPrice,
+            agentName,
+            agentEmail,
+            agentImage,
+            description,
+            userName: name,
+            userEmail: email,
+            userPhoto: photo,
+            review: form.review.value,
+            reviewDate,
+        }
+
+        const reviewRes = await axiosSecure.post('/review', reviewInfo);
+        console.log(reviewRes.data);
+
+        if (reviewRes.data.insertedId) {
+            // show success popup
+            Swal.fire({
+                title: "Success!",
+                text: `Review Send successfully.`,
+                icon: "success"
+            });
+        }
+
+    }
 
 
 
@@ -73,7 +118,37 @@ const Details = () => {
                         <div className='flex justify-end'>
                             <div className='flex gap-4 mt-3'>
                                 <button onClick={handleAddWishlist} className="bg-[#152475] px-4 py-1 text-white border border-[#152475] hover:bg-transparent hover:text-[#152475] ">Add To Wishlist</button>
-                                <button className="bg-[#152475] px-4 py-1 text-white border border-[#152475] hover:bg-transparent hover:text-[#152475] ">Add a review</button>
+                                <label htmlFor="applyJobModal" className="bg-[#152475] px-4 py-1 text-white border border-[#152475] hover:bg-transparent hover:text-[#152475] ">Add a review</label>
+
+                                <input type="checkbox" id="applyJobModal" className="modal-toggle" />
+                                <div className="modal">
+                                    <div className="modal-box">
+                                        <label htmlFor="applyJobModal" className="flex justify-end">
+                                            <AiOutlineCloseCircle className="text-4xl"></AiOutlineCloseCircle>
+                                        </label>
+
+                                        <h3 className="font-bold text-xl text-center">Your Review</h3>
+                                        <form onSubmit={handleReviewSubmit}>
+                                            <div className="my-2">
+                                                <label className="text-gray-700">Property Title</label><br />
+                                                <input className="p-[6px] text-black rounded w-full border border-gray-500" defaultValue={propertyTitle} type="text" name="modalProperty" id="" readOnly/>
+                                            </div>
+
+                                            <div className="my-2">
+                                                <label className="text-gray-700">Review Here</label><br />
+                                                <textarea className="p-[6px] text-black rounded w-full border border-gray-500" name="review" id="" cols="20" rows="5"></textarea>
+                                            </div>
+
+                                            <div method="dialog" className="flex justify-end">
+                                                <button type="submit" className="mt-4">
+                                                    <label className="bg-[#152475] px-8 py-2 rounded-md cursor-pointer text-white" htmlFor="applyJobModal">Submit Review</label>
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
