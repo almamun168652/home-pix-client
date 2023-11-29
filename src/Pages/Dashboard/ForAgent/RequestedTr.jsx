@@ -10,39 +10,40 @@ const RequestedTr = ({ item, refetch }) => {
     const { _id, propertyTitle , propertyLocation , buyerEmail , buyerName , offeredAmount} = item || {}
 
 
-    // const handlePropertyVerified = id => {
-    //     axiosSecure.patch(`/property/verified/${id}`)
-    //         .then(res => {
-    //             console.log(res.data);
-    //             if (res.data?.modifiedCount > 0) {
-    //                 refetch()
-    //                 Swal.fire({
-    //                     position: "top-end",
-    //                     icon: "success",
-    //                     title: `${propertyTitle} Verified Successfully!`,
-    //                     showConfirmButton: false,
-    //                     timer: 2500
-    //                 });
-    //             }
-    //         })
-    // }
+    const handleRequestAccept = id => {
+        axiosSecure.patch(`/request/accept/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data?.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${propertyTitle} request accepted.`,
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+    }
 
-    // const handlePropertyRejected = id => {
-    //     axiosSecure.patch(`/property/rejected/${id}`)
-    //         .then(res => {
-    //             console.log(res.data);
-    //             if (res.data?.modifiedCount > 0) {
-    //                 refetch()
-    //                 Swal.fire({
-    //                     position: "top-end",
-    //                     icon: "success",
-    //                     title: `${propertyTitle} Verified Successfully!`,
-    //                     showConfirmButton: false,
-    //                     timer: 2500
-    //                 });
-    //             }
-    //         })
-    // }
+  
+    const handleRequestReject = id => {
+        axiosSecure.patch(`/request/reject/${id}`)
+            .then(res => {
+                console.log(res.data);
+                if (res.data?.modifiedCount > 0) {
+                    refetch()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${propertyTitle} has been rejected.`,
+                        showConfirmButton: false,
+                        timer: 2500
+                    });
+                }
+            })
+    }
 
 
 
@@ -66,10 +67,13 @@ const RequestedTr = ({ item, refetch }) => {
                $ {offeredAmount}
             </td>
             <td className="px-2 py-2 text-gray-900 font-medium">
-                <button className='border hover:bg-green-700 hover:text-white border-green-700 text-xs font-bold px-2 py-1 rounded md cursor-pointer text-green-700'>Accept</button>
+                <button 
+                onClick={()=> handleRequestAccept(_id)}
+                className='border hover:bg-green-700 hover:text-white border-green-700 text-xs font-bold px-2 py-1 rounded md cursor-pointer text-green-700'>Accept</button>
             </td>
             <td className="px-2 py-2 text-gray-900 font-medium">
                 <button
+                  onClick={()=> handleRequestReject(_id)}
                   className='border hover:bg-red-700 hover:text-white border-red-700 text-xs font-bold px-2 py-1 rounded md cursor-pointer text-red-700'>Reject</button>
             </td>
 
