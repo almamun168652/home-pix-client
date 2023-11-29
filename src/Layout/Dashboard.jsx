@@ -195,7 +195,7 @@ const Dashboard = () => {
 
                 </ul>}
             </div>
-            <div className="w-full md:w-9/12 bg-[#7DD3FC] px-4">
+            <div className="w-full md:w-9/12 bg-[#7DD3FC] px-4 ">
                 <Outlet></Outlet>
             </div>
         </div>

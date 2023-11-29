@@ -19,6 +19,8 @@ import ManageProperties from "../Pages/Dashboard/ForAdmin/ManageProperties";
 import Details from "../Pages/Detaiils/Details";
 import Wishlist from "../Pages/Dashboard/ForUser/Wishlist";
 import Offered from "../Pages/Dashboard/ForUser/Offered";
+import PropertyBought from "../Pages/Dashboard/ForUser/PropertyBought";
+import RequestedProperties from "../Pages/Dashboard/ForAgent/requestedProperties";
 
 const createdRoute = createBrowserRouter([
     {
@@ -64,7 +66,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'property-bought',
-                element: <h1>property bought</h1>
+                element: <PropertyBought></PropertyBought>
             },
             {
                 path: 'my-reviews',
@@ -95,7 +97,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'requested-properties',
-                element: <AgentRoute><h1>requested properties</h1></AgentRoute>
+                element: <AgentRoute><RequestedProperties></RequestedProperties></AgentRoute>
             },
             {
                 path: 'my-added-properties/update/:id',
