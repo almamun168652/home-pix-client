@@ -82,7 +82,7 @@ const Details = () => {
 
     }
 
-
+    console.log(startPrice)
 
 
     return (
@@ -108,7 +108,7 @@ const Details = () => {
 
                     <div className="p-4">
                         <div className="flex justify-between flex-col md:flex-row">
-                            <h1 className="text-lg font-semibold">Price Range: {startPrice - endPrice} $</h1>
+                            <h1 className="text-lg font-semibold">Price Range: {startPrice}-{endPrice} $</h1>
                             <span className={"border border-[#152475] text-[#152475] text-md font-semibold px-2 py-1 rounded-full"}>
                                 {(status == 'verify') ? 'pending' : status}
                             </span>
