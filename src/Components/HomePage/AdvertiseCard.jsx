@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const AdvertieseCard = ({ item }) => {
 
-    const { startPrice, advertiseId, endPrice, status, propertyImage, propertyTitle, propertyLocation, agentName, agentImage } = item || {}
+    const { startPrice, advertiseId, endPrice, status, propertyImage, propertyTitle, propertyLocation, agentName } = item || {}
 
     return (
         <div className="flex flex-col justify-center items-center">
