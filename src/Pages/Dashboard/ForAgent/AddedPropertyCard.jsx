@@ -63,14 +63,23 @@ const AddedPropertyCard = ({ item , refetch }) => {
                     <p className="text-gray-700 leading-tight mb-2"></p>
                     <div className='flex justify-end'>
                         <div className='flex gap-4 mt-3'>
-                            <Link to={`update/${_id}`}>
+                            {
+                                status == 'rejected' ? <Link>
                                 <button
-                                    disabled={status == 'rejected'}
-                                    className="font-semibold px-3 py-1 rounded border bg-green-700 hover:bg-green-600 text-white"
+                                disabled={true}
+                                    className="font-semibold px-3 py-1 rounded border bg-slate-500 text-white"
                                 >
                                     Update
                                 </button>
-                            </Link>
+                            </Link> : 
+                            <Link to={`update/${_id}`}>
+                            <button
+                                className="font-semibold px-3 py-1 rounded border bg-green-700 hover:bg-green-600 text-white"
+                            >
+                                Update
+                            </button>
+                        </Link>
+                            }
                             <button
                                 onClick={() => handlePropertyDelete(_id)}
                                 className="font-semibold px-3 py-1 rounded border bg-red-700 hover:bg-red-600 text-white"

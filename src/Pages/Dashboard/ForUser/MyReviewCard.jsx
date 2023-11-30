@@ -8,7 +8,7 @@ const MyReviewCard = ({ item, refetch }) => {
 
     const axiosSecure = useAxiosSecure();
 
-    const { _id, userPhoto, propertyTitle, review, reviewDate, agentName } = item || {}
+    const { _id, userPhoto, propertyTitle, review, reviewDate, reviewTime, agentName } = item || {}
 
     const handleDeleteReview = id => {
         Swal.fire({
@@ -40,7 +40,10 @@ const MyReviewCard = ({ item, refetch }) => {
     return (
         <div className='border-2 rounded-lg border-[#152475] p-4 shadow-lg bg-green-100'>
             <div className='flex justify-between items-center'>
-                <p className='text-black font-semibold'>Review Date: {reviewDate.slice(0, 10)}</p>
+                <div>
+                    <p className='text-black font-semibold'>Review Date: {reviewDate.slice(0, 10)}</p>
+                    <p className='text-black font-semibold'>Review Time: {reviewTime}</p>
+                </div>
                 <div>
                     <img className='h-10 w-10 rounded-full border-2 border-white' src={userPhoto} alt="" />
                 </div>
@@ -54,7 +57,7 @@ const MyReviewCard = ({ item, refetch }) => {
             </div>
 
             <div className='flex justify-end'>
-                <button onClick={()=> handleDeleteReview(_id)} className='px-2 py-1 rounded bg-red-700 text-white hover:bg-red-800'>Delete</button>
+                <button onClick={() => handleDeleteReview(_id)} className='px-2 py-1 rounded bg-red-700 text-white hover:bg-red-800'>Delete</button>
             </div>
 
         </div>

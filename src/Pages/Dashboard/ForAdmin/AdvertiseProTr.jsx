@@ -7,7 +7,7 @@ const AdvertiseProTr = ({ item }) => {
 
     const axiosSecure = useAxiosSecure();
 
-    const { _id, propertyImage, propertyTitle,propertyLocation, status, startPrice, endPrice, agentName } = item || {}
+    const { _id, propertyImage, propertyTitle, propertyLocation, status, startPrice, endPrice, agentName , agentEmail } = item || {}
 
     const addAdvertise = async () => {
 
@@ -21,8 +21,8 @@ const AdvertiseProTr = ({ item }) => {
             agentName,
             propertyLocation,
             status,
+            agentEmail
         }
-
 
         const advertiseRes = await axiosSecure.post('/advertise', advertiseData);
         console.log(advertiseRes.data);
@@ -35,7 +35,6 @@ const AdvertiseProTr = ({ item }) => {
                 icon: "success"
             });
         }
-
 
     }
 
@@ -120,11 +119,11 @@ const AdvertiseProTr = ({ item }) => {
                 {agentName}
             </td>
             <td className="px-2 py-2 text-gray-900 font-medium">
-                <button onClick={addAdvertise} className='border hover:bg-green-700 hover:text-white border-green-700 text-xs font-bold px-2 py-1 rounded md cursor-pointer text-green-700'>Advertise</button>
+                <button onClick={addAdvertise} className='border bg-green-700 text-white border-green-700 text-xs font-bold px-2 py-1 rounded md cursor-pointer '>Advertise</button>
             </td>
             <td className="px-2 py-2 text-gray-900 font-medium">
                 <button onClick={()=> advertiseDelete(_id)}
-                    className='border hover:bg-red-700 hover:text-white border-red-700 text-xs font-bold px-2 py-1 rounded md cursor-pointer text-red-700'>Remove Advertise</button>
+                    className='border bg-red-700 text-white border-red-700 text-xs font-bold px-2 py-1 rounded md cursor-pointer'>Remove Advertise</button>
             </td>
 
         </tr>

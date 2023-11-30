@@ -25,6 +25,7 @@ import MyReview from "../Pages/Dashboard/ForUser/MyReview";
 import ManageReviews from "../Pages/Dashboard/ForAdmin/ManageReviews";
 import UserProfile from "../Components/Dashboard/UserDashboard/UserProfile";
 import AdvertiseProperty from "../Pages/Dashboard/ForAdmin/AdvertiseProperty";
+import Payment from "../Pages/Payment/Payment";
 
 const createdRoute = createBrowserRouter([
     {
@@ -52,6 +53,11 @@ const createdRoute = createBrowserRouter([
                 path: '/verifiedProperty/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
                 loader: ({params})=> fetch(`http://localhost:5000/verifiedProperty/details/${params.id}`) 
+            },
+            {
+                path: '/goPay/:id',
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>,
+                // loader: ({params})=> fetch(`http://localhost:5000/payment/${params.id}`)
             },
         ]
     },

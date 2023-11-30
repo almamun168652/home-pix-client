@@ -59,6 +59,16 @@ const UsersTr = ({ item, refetch, index }) => {
         return data;
     };
 
+    const getFraudAdvertiseProperties = async (email) => {
+        const { data } = await axiosOpen(`/fraudAdvertise/${email}`);
+        return data;
+    };
+
+    const fraudAdvertiseCick = async (fraudPropertiesIdsArray) => {
+        const { data } = await axiosOpen.post(`/fraudAdvertiseCick`, fraudPropertiesIdsArray);
+        return data;
+    };
+
 
     const handleMarkAsFraud = (id) => {
         axiosSecure.patch(`/users/fraud/${id}`)
@@ -66,12 +76,14 @@ const UsersTr = ({ item, refetch, index }) => {
                 console.log(res.data);
                 if (res.data?.modifiedCount > 0) {
                     const fraudData = await getFraudAgentProperties(email);
-
                     const fraudPropertiesId = fraudData.map(item => item._id);
+                    const fraudPropertydata = await fraudPropertyCick(fraudPropertiesId);
+                    console.log(fraudPropertydata);
 
-                    const data = await fraudPropertyCick(fraudPropertiesId);
-
-                    console.log(data);
+                    const fraudAdvertise = await getFraudAdvertiseProperties(email);
+                    const fraudAdvertiseId = fraudAdvertise.map(item => item._id);
+                    const fraudAdvertiseData = await fraudAdvertiseCick(fraudAdvertiseId);
+                    console.log(fraudAdvertiseData);
 
 
                     refetch()

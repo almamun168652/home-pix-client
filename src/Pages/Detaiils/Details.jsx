@@ -66,6 +66,7 @@ const Details = () => {
             userPhoto: photo,
             review: form.review.value,
             reviewDate,
+            reviewTime: new Date().toLocaleTimeString(),
         }
 
         const reviewRes = await axiosSecure.post('/review', reviewInfo);
