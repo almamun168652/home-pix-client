@@ -26,6 +26,7 @@ import ManageReviews from "../Pages/Dashboard/ForAdmin/ManageReviews";
 import UserProfile from "../Components/Dashboard/UserDashboard/UserProfile";
 import AdvertiseProperty from "../Pages/Dashboard/ForAdmin/AdvertiseProperty";
 import Payment from "../Pages/Payment/Payment";
+import MySoldProperties from "../Pages/Dashboard/ForAgent/MySoldProperties";
 
 const createdRoute = createBrowserRouter([
     {
@@ -52,12 +53,12 @@ const createdRoute = createBrowserRouter([
             {
                 path: '/verifiedProperty/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({params})=> fetch(`http://localhost:5000/verifiedProperty/details/${params.id}`) 
+                loader: ({params})=> fetch(`https://home-pix-server.vercel.app/verifiedProperty/details/${params.id}`) 
             },
             {
                 path: '/goPay/:id',
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>,
-                // loader: ({params})=> fetch(`http://localhost:5000/payment/${params.id}`)
+                // loader: ({params})=> fetch(`https://home-pix-server.vercel.app/payment/${params.id}`)
             },
         ]
     },
@@ -85,7 +86,7 @@ const createdRoute = createBrowserRouter([
             {
                 path: 'wishlist/offered/:id',
                 element: <Offered></Offered>,
-                loader: ({ params }) => fetch(`http://localhost:5000/wishlist/${params.id}`)
+                loader: ({ params }) => fetch(`https://home-pix-server.vercel.app/wishlist/${params.id}`)
             },
 
             // agent only
@@ -103,7 +104,7 @@ const createdRoute = createBrowserRouter([
             },
             {
                 path: 'my-sold-properties',
-                element: <AgentRoute><h1>my sold properties</h1></AgentRoute>
+                element: <AgentRoute><MySoldProperties></MySoldProperties></AgentRoute>
             },
             {
                 path: 'requested-properties',
@@ -112,7 +113,7 @@ const createdRoute = createBrowserRouter([
             {
                 path: 'my-added-properties/update/:id',
                 element: <AgentRoute><PropertyUpdate></PropertyUpdate></AgentRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/addedProperties/${params.id}`)
+                loader: ({ params }) => fetch(`https://home-pix-server.vercel.app/addedProperties/${params.id}`)
             },
 
             // admin only

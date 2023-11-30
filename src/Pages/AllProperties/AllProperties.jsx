@@ -7,8 +7,8 @@ import { FiSearch } from 'react-icons/fi';
 
 
 
+
 const AllProperties = () => {
-    
     
     const axiosSecure = useAxiosSecure()
     const { data: verifiedProperties = [], refetch, isPending: verifiedPropertiesLoading } = useQuery({
@@ -26,7 +26,7 @@ const AllProperties = () => {
     const handleSearch = e => {
         e.preventDefault();
         const form = e.target;
-        const inputValue = form.search.value;
+        const inputValue = form.search?.value;
 
         const filterdData = verifiedProperties.filter(item => item.propertyTitle.toLowerCase().includes(inputValue.toLowerCase()));
 
@@ -35,12 +35,6 @@ const AllProperties = () => {
     }
 
     
-
-
-
-
-
- 
 
 
     if (verifiedPropertiesLoading) {

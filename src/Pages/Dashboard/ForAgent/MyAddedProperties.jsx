@@ -27,7 +27,7 @@ const MyAddedProperties = () => {
         <div>
             <DashboardTitle title="My Added Properties"></DashboardTitle>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mx-4 mb-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:mx-4 mb-10">
                 {
                     myProperties.map(item => <AddedPropertyCard refetch={refetch} key={item._id} item={item} ></AddedPropertyCard>)
                 }

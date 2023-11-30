@@ -21,7 +21,7 @@ const WishlistCard = ({ item }) => {
                         <img className="absolute left-0 top-0 w-full h-full object-cover object-center transition duration-50" loading="lazy" src={propertyImage} />
                     </div>
 
-                    <div className="flex flex-col gap-0.5 py-2">
+                    <div className="flex flex-col gap-0.5 px-4 pb-4 py-2 md:py-2">
 
                         <div className="flex items-center">
                             <img src={agentImage} alt="Avatar" className="w-8 h-8 rounded-full mr-2 object-cover" />

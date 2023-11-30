@@ -23,7 +23,7 @@ const BoughtCard = ({ item }) => {
                         <img className="absolute left-0 top-0 w-full h-full object-cover object-center transition duration-50" loading="lazy" src={propertyImage} />
                     </div>
 
-                    <div className="flex flex-col gap-1 py-2">
+                    <div className="flex flex-col gap-1 px-4 pb-4 md:py-2">
                         <p className="text-xl font-bold ">{propertyTitle}</p>
                         <div className="flex items-center ">
                             <span className="font-semibold text-[#152475]">Agent: {agentName}</span>
@@ -37,6 +37,9 @@ const BoughtCard = ({ item }) => {
                         <div className='flex gap-4 mt-3'>
                             {
                                 status == 'accepted' && <Link to={`/goPay/${_id}`}><button className='text-white bg-[#152475] px-3 hover:bg-white hover:text-[#152475] font-semibold text-sm py-1 rounded border border-[#152475]'>Pay Now</button></Link>
+                            }
+                            {
+                                status == 'bought' && <p className='md:text-white text-black font-bold md:font-medium text-sm md:text-md md:bg-[#152475] px-1'>Tx. ID: {item?.transactionId}</p>
                             }
                         </div>
 

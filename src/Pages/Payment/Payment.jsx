@@ -17,7 +17,7 @@ const Payment = () => {
         }
     })
 
-    console.log(paymentData);
+    // console.log(paymentData);
 
     return (
         <div>

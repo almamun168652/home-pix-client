@@ -82,7 +82,7 @@ const Navbar = () => {
                     {user ? (
                         <div className="dropdown dropdown-end">
                             <div className="flex items-center gap-1">
-                                <h2 className=" font-bold">{user?.displayName}</h2>
+                                <h2 className="hidden md:block font-bold">{user?.displayName}</h2>
                                 <div tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                     <div className="w-10 border-2 border-[#152475] rounded-full">
                                         <img src={user?.photoURL} />
