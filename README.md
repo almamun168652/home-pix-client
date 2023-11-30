@@ -1,8 +1,10 @@
-# React + Vite
+# Home-Pix
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live-Link: [Live-Link](https://aback-spoon.surge.sh)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Project Features
+- You can use our Home-Pix website to find various property sell post.
+- Here you can see many different category of property.
+- You must register and login our home-pix website to see details and buy any property.
+- If you want you can review and buy request for your choice.
+- You can visit our website using all of the devices. because our home-pix website is responsive all the screen size.
