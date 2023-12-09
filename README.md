@@ -2,6 +2,8 @@
 
 ## Live-Link: [Live-Link](https://aback-spoon.surge.sh)
 
+### Home Pix Single Page Application(SPA) React.js application built using React, Tailwind CSS,Sweetalert, Axios, Tanstack Query, Stripe, Mongodb, Express, Firebase.
+
 ### Project Features
 - You can use our Home-Pix website to find various property sell post.
 - Here you can see many different category of property.
